@@ -4,16 +4,17 @@ public class Bank {
     Account[] accounts;
     int totalAccount;
 
-    public int getTatalAccount() {
-        return getTatalAccount();
+    public int getTotalAccount() {
+        return totalAccount;
     }
-    public void setTatalAccount(int tatalAccount) {
-        this.totalAccount = tatalAccount;
+    public void setTotalAccount(int totalAccount) {
+        this.totalAccount = totalAccount;
     }
     public void setAccounts(Account[] accounts) {
         this.accounts = accounts;
     }
     public void addAccount(String accountNo,String name) {
+
 
     }
     public Account getAccount(String accountNo) {
@@ -27,10 +28,6 @@ public class Bank {
     }
     public Account[] getAccounts() {
         return accounts;
-
-    }
-    public int getTotalAccount() {
-        return totalAccount;
 
     }
 }
