@@ -15,7 +15,7 @@ public class Account {
   private long balance;
   private List<Transaction> transactions;
 
-  // 게터세터 메서드
+    // 게터세터 메서드
   public String getAccountNo() {
     return accountNo;
   }
