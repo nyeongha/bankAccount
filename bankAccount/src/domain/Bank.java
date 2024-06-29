@@ -34,4 +34,8 @@ public class Bank {
     }
   }
 
+  public List<Account> getAccounts(){
+    return accounts;
+  }
+
 }
