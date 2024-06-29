@@ -7,14 +7,13 @@ import java.util.Optional;
 public class Bank {
 
   private List<Account> accounts;
-  private int totalAccount;
+  private int totalAccount=0;
 
   public Bank() {
     this.accounts = new ArrayList<>();
   }
 
     public int getTotalAccount() {  //총 계좌수 반환 메서드
-    totalAccount = accounts.size();
     return totalAccount;
   }
 
@@ -24,6 +23,7 @@ public class Bank {
     account.setAccountNo(accountNo);
     account.setName(name);
     accounts.add(account);
+    totalAccount+=1;
   }
 
 
