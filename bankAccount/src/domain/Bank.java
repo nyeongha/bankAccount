@@ -28,9 +28,9 @@ public class Bank {
 
 
   public Optional<Account> getAccount(String accountNo) { //계좌번호로 계좌찾는 메서드
-    for (Account ac : accounts) {
-      if (ac.getAccountNo().equals(accountNo)) {
-        return Optional.of(ac);
+    for (Account account : accounts) {
+      if (account.getAccountNo().equals(accountNo)) {
+        return Optional.of(account);
       }
     }
     return Optional.empty();
