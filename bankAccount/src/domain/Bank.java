@@ -22,18 +22,16 @@ public class Bank {
     accounts.add(account);
   }
 
-  public Account getAccount(String accountNo) {   //계좌 번호 명으로 계좌 찾는 메서드
-    if (accounts.isEmpty()) {   //은행에 계좌가 없다면
-      return null;
-    } else {
-      for (Account ac : accounts) {   //은행에 계좌리스트가 있으면 계좌를 돌면서
-        if (ac.getAccountNo().equals(accountNo)) {    //해당계좌와 같은 계좌번호가 존재하면
-          return ac;    //해당계좌를 반환
-        }
+
+  public Optional<Account> getAccount(String accountNo) { //계좌번호로 계좌찾는 메서드
+    for (Account ac : accounts) {
+      if (ac.getAccountNo().equals(accountNo)) {
+        return Optional.of(ac);
       }
-      return null;    //없으면 널을 반환
     }
+    return Optional.empty();
   }
+
 
   public List<Account> getAccounts(){   //계좌 목록 반환 메서드
     return accounts;
