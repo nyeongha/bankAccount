@@ -7,15 +7,11 @@ public class Bank {
   private List<Account> accounts;
   int totalAccount;
 
-  public int getTotalAccount() {
-
+  public int getTotalAccount() {  //총 계좌수 반환 메서드
+    totalAccount=accounts.size();
     return totalAccount;
   }
 
-  public void setTotalAccount(int totalAccount) {
-
-    this.totalAccount = totalAccount;
-  }
 
   public void addAccount(String accountNo, String name) {   //계좌생성 메서드
     Account account=new Account();
