@@ -3,9 +3,9 @@ package domain;
 public class Transaction {
     private String transactionDate;
     private String transactionTime;
-    private String kind;   //입출금
-    private long amount;   //거래금액
-    private long balance;   //잔고
+    private String kind;
+    private long amount;
+    private long balance;
 
     public Transaction(String kind, long amount, long balance) {
         Date date = new Date();
