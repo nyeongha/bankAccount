@@ -8,14 +8,20 @@ public class Bank {
   int totalAccount;
 
   public int getTotalAccount() {
+
     return totalAccount;
   }
 
   public void setTotalAccount(int totalAccount) {
+
     this.totalAccount = totalAccount;
   }
 
-  public void addAccount(String accountNo, String name) {
+  public void addAccount(String accountNo, String name) {   //계좌생성 메서드
+    Account account=new Account();
+    account.setAccountNo(accountNo);
+    account.setName(name);
+    accounts.add(account);
 
   }
 
