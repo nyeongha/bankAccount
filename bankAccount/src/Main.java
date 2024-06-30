@@ -29,23 +29,14 @@ public class Main {
     int menu = 0;
     while (menu != EXIT){
       menu = Integer.parseInt(br.readLine());
-      StringBuilder sb = new StringBuilder();
+
+      StringBuilder sb=new StringBuilder();
+
+
       String output = switch (menu) {
-        case 1:
-          System.out.println("== 전체 계좌 목록 ==");
-          for (Account account: bank.getAccounts()){
-            System.out.println(account.toString());
-          }
-        case 2:
-          System.out.println("= 해당 계좌번호의 계좌정보 =");
-          Account accountFindByAccountNo = bank.getAccount(br.readLine());
-          System.out.println(accountFindByAccountNo.toString());
-        case 3:
-          System.out.println("= 해당 소유자명의 계좌 목록 =");
-          List<Account> accounts = bank.findAccounts(br.readLine());
-          for (Account accountFindByName:accounts){
-            System.out.println(accountFindByName.toString());
-          }
+        case 1  -> accountList(sb);
+        case 2  -> accountInfoByAccountNo();
+        case 3  -> accountListByName(sb);
         case 4 -> runDeposit(sb);
         case 5 -> runWithdraw(sb);
         case 6:
@@ -77,6 +68,30 @@ public class Main {
     }
   }
 
+    private static String accountListByName(StringBuilder sb) throws IOException {
+        System.out.println("= 해당 소유자명의 계좌 목록 =");
+        List<Account> accounts = bank.findAccounts(br.readLine());
+        for (Account accountFindByName:accounts){
+          sb.append(accountFindByName.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
+
+    private static String accountInfoByAccountNo() throws IOException {
+        System.out.println("= 해당 계좌번호의 계좌정보 =");
+        Account accountFindByAccountNo = bank.getAccount(br.readLine());
+        return accountFindByAccountNo.toString();
+  }
+
+  private static String accountList(StringBuilder sb) {
+    sb.append("== 전체 계좌 목록 ==");
+    for (Account account: bank.getAccounts()){
+      sb.append(account.toString());
+    }
+    return sb.toString();
+  }
+
   private static String runWithdraw(StringBuilder sb) throws IOException {
     try{
       System.out.println("출금할 계좌를 입력해주세요: ");
@@ -85,7 +100,6 @@ public class Main {
       System.out.println("출금할 금액을 입력해주세요: ");
       long withDrawAmount = Long.parseLong(br.readLine());
       findWithdrawAccount.withdraw(withDrawAmount);
-
       sb.append(withDrawAmount + "원 인출하셨습니다.").append("\n")
               .append("현재 잔액은: " + findWithdrawAccount.getBalance() + "원 입니다.");
       return sb.toString();
