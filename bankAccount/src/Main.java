@@ -37,10 +37,8 @@ public class Main {
         case 1  -> accountList(sb);
         case 2  -> accountInfoByAccountNo(sb);
 
-        case 3  -> accountListByName(br, sb);
-
-
-          case 4 -> runDeposit(sb);
+        case 3  -> accountListByName(sb);
+        case 4 -> runDeposit(sb);
         case 5 -> runWithdraw(sb);
         case 6:
           System.out.println("계좌번호를 입력해주세요");
@@ -71,7 +69,7 @@ public class Main {
     }
   }
 
-    private static String accountListByName(BufferedReader br, StringBuilder sb) throws IOException {
+    private static String accountListByName(StringBuilder sb) throws IOException {
         System.out.println("= 해당 소유자명의 계좌 목록 =");
         List<Account> accounts = bank.findAccounts(br.readLine());
         for (Account accountFindByName:accounts){
