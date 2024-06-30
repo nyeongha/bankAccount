@@ -14,9 +14,9 @@ public class Main {
   public static void main(String[] args) throws IOException {
 
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringBuilder sb = new StringBuilder();
+    StringBuilder mainSb = new StringBuilder();
 
-    sb.append("1. 전체 계좌 출력\n")
+    mainSb.append("1. 전체 계좌 출력\n")
             .append("2. 계좌로 계좌 정보 찾기\n")
             .append("3. 소유주 명으로 계좌 찾기\n")
             .append("4. 입금\n")
@@ -25,10 +25,11 @@ public class Main {
             .append("7. 계좌 개설\n")
             .append("8. 종료");
 
-    System.out.println(sb);
+    System.out.println(mainSb);
 
     int menu = 0;
     while (menu != EXIT){
+      StringBuilder sb = new StringBuilder();
       menu = Integer.parseInt(br.readLine());
       String output = switch (menu) {
         case 1:
@@ -61,33 +62,43 @@ public class Main {
             System.out.println(e.getMessage());
           }
         case 6:
-          System.out.println("계좌번호를 입력해주세요");
-          String excistingAccountNo = br.readLine();
-
-          System.out.println("= 거래내역 =");
-          List<Transaction> transactions = bank.getAccount(excistingAccountNo).getTransactions();
-
-          if (transactions.isEmpty()){
-            System.out.println("거래내역이 비었습니다.");
-          } else{
-            for (Transaction transaction : transactions) {
-              System.out.println(transaction.toString());
-            }
-          }
+          browseTransactions(sb);
         case 7:
-          System.out.println("개설할 계좌번호를 입력해주세요");
-          String newAccountNo = br.readLine();
-
-
-          System.out.println("이름을 입력해주세요");
-          String name = br.readLine();
-
-          bank.addAccount(newAccountNo, name);
+          createAccount(sb);
       };
 
       System.out.println(output);
     }
 
+  }
+
+  private static String createAccount(StringBuilder sb) throws IOException {
+    System.out.println("개설할 계좌번호를 입력해주세요");
+    String newAccountNo = br.readLine();
+
+    System.out.println("이름을 입력해주세요");
+    String name = br.readLine();
+
+    bank.addAccount(newAccountNo, name);
+    sb.append("계좌를 개설했습니다.");
+    return sb.toString();
+  }
+
+  private static String browseTransactions(StringBuilder sb) throws IOException {
+    System.out.println("계좌번호를 입력해주세요");
+    String excistingAccountNo = br.readLine();
+
+    List<Transaction> transactions = bank.getAccount(excistingAccountNo).getTransactions();
+
+    if (transactions.isEmpty()){
+      sb.append("거래내역이 비었습니다.");
+    } else{
+      sb.append("= 거래내역 =");
+      for (Transaction transaction : transactions) {
+        sb.append(transaction.toString());
+      }
+    }
+    return sb.toString();
   }
 
   private static String runDeposit() throws IOException {
