@@ -15,7 +15,6 @@ public class Main {
 
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringBuilder mainSb = new StringBuilder();
-
     mainSb.append("1. 전체 계좌 출력\n")
             .append("2. 계좌로 계좌 정보 찾기\n")
             .append("3. 소유주 명으로 계좌 찾기\n")
@@ -31,6 +30,7 @@ public class Main {
     while (menu != EXIT){
       StringBuilder sb = new StringBuilder();
       menu = Integer.parseInt(br.readLine());
+      StringBuilder sb = new StringBuilder();
       String output = switch (menu) {
         case 1:
           System.out.println("== 전체 계좌 목록 ==");
@@ -47,20 +47,8 @@ public class Main {
           for (Account accountFindByName:accounts){
             System.out.println(accountFindByName.toString());
           }
-        case 4 -> runDeposit();
-        case 5:
-          try{
-            System.out.println("출금할 계좌를 입력해주세요: ");
-            String account = br.readLine();
-            Account findWithdrawAccount = bank.getAccount(account);
-            System.out.println("출금할 금액을 입력해주세요: ");
-            long withDrawAmount = Long.parseLong(br.readLine());
-            findWithdrawAccount.withdraw(withDrawAmount);
-            System.out.println(withDrawAmount + "원 출금하셨습니다.");
-            System.out.println("현재 잔액은: " + findWithdrawAccount.getBalance() + "입니다.");
-          }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-          }
+        case 4 -> runDeposit(sb);
+        case 5 -> runWithdraw(sb);
         case 6:
           browseTransactions(sb);
         case 7:
@@ -69,7 +57,6 @@ public class Main {
 
       System.out.println(output);
     }
-
   }
 
   private static String createAccount(StringBuilder sb) throws IOException {
@@ -104,6 +91,24 @@ public class Main {
   private static String runDeposit() throws IOException {
     StringBuilder sb = new StringBuilder();
 
+  private static String runWithdraw(StringBuilder sb) throws IOException {
+    try{
+      System.out.println("출금할 계좌를 입력해주세요: ");
+      String account = br.readLine();
+      Account findWithdrawAccount = bank.getAccount(account);
+      System.out.println("출금할 금액을 입력해주세요: ");
+      long withDrawAmount = Long.parseLong(br.readLine());
+      findWithdrawAccount.withdraw(withDrawAmount);
+
+      sb.append(withDrawAmount + "원 인출하셨습니다.").append("\n")
+              .append("현재 잔액은: " + findWithdrawAccount.getBalance() + "원 입니다.");
+      return sb.toString();
+    }catch (IllegalArgumentException e){
+      return e.getMessage();
+    }
+  }
+
+  private static String runDeposit(StringBuilder sb) throws IOException {
     System.out.println("입금할 계좌를 입력해주세요: ");
     String depositAccount = br.readLine();
     Account findDepositAccount = bank.getAccount(depositAccount);
@@ -112,7 +117,8 @@ public class Main {
     findDepositAccount.deposit(depositAmount);
 
     sb.append(depositAccount + "원 입금하셨습니다.").append("\n")
-            .append("현재 잔액은: " + findDepositAccount.getBalance() + "입니다.");
+            .append("현재 잔액은: " + findDepositAccount.getBalance() + "원 입니다.");
+
     return sb.toString();
   }
 }
