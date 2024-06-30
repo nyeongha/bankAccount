@@ -21,7 +21,7 @@ public class Bank {
   public void addAccount(String accountNo, String name) {   //계좌생성 메서드
     Account account = new Account(accountNo,name);
     accounts.add(account);
-    totalAccount += 1;
+    totalAccount ++;
   }
 
 
@@ -32,8 +32,6 @@ public class Bank {
       }
     }
     throw new IllegalArgumentException("No such account");
-
-      //계좌가 없다면 Optional.empty()반환
   }
 
 
