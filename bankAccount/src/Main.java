@@ -35,8 +35,7 @@ public class Main {
 
       String output = switch (menu) {
         case 1  -> accountList(sb);
-        case 2  -> accountInfoByAccountNo(sb);
-
+        case 2  -> accountInfoByAccountNo();
         case 3  -> accountListByName(sb);
         case 4 -> runDeposit(sb);
         case 5 -> runWithdraw(sb);
@@ -79,15 +78,14 @@ public class Main {
     }
 
 
-    private static String accountInfoByAccountNo(StringBuilder sb) throws IOException {
-    System.out.println("= 해당 계좌번호의 계좌정보 =");
-    Account accountFindByAccountNo = bank.getAccount(br.readLine());
-    sb.append(accountFindByAccountNo.toString());
-    return sb.toString();
+    private static String accountInfoByAccountNo() throws IOException {
+        System.out.println("= 해당 계좌번호의 계좌정보 =");
+        Account accountFindByAccountNo = bank.getAccount(br.readLine());
+        return accountFindByAccountNo.toString();
   }
 
   private static String accountList(StringBuilder sb) {
-    System.out.println("== 전체 계좌 목록 ==");
+    sb.append("== 전체 계좌 목록 ==");
     for (Account account: bank.getAccounts()){
       sb.append(account.toString());
     }
