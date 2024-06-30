@@ -64,4 +64,11 @@ public class Account {
     // 거래내역 리스트에 추가
     transactions.add(transaction);
   }
+
+  @Override
+  public String toString() {
+    return "[계좌번호: " + accountNo+
+            ", 소유자 명: " + name + '\'' +
+            ", 잔액: " + balance +"]";
+  }
 }

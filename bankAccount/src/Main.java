@@ -30,7 +30,7 @@ public class Main {
         case 1:
           System.out.println("== 전체 계좌 목록 ==");
           for (Account account: bank.getAccounts()){
-            System.out.printf("[계좌번호: "+ account.getAccountNo()+", 소유자 명: "+account.getName()+", 잔액"+account.getBalance()+"]\n");
+            System.out.println(account.toString());
           }
           break;
 
@@ -44,7 +44,7 @@ public class Main {
           System.out.println("= 해당 소유자명의 계좌 목록 =");
           List<Account> accounts = bank.findAccounts(br.readLine());
           for (Account accountFindByName:accounts){
-            System.out.println("[계좌번호 :"+accountFindByName.getAccountNo()+", 소유자 명 : "+ accountFindByName.getName()+", 잔액 : "+ accountFindByName.getBalance()+"]");
+            toString(accountFindByName);
           }
           break;
         case 4:
@@ -60,5 +60,9 @@ public class Main {
       }
     }
 
+  }
+
+  private static void toString(Account accountFindByName) {
+    System.out.println("[계좌번호 :"+ accountFindByName.getAccountNo()+", 소유자 명 : "+ accountFindByName.getName()+", 잔액 : "+ accountFindByName.getBalance()+"]");
   }
 }
