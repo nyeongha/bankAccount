@@ -29,7 +29,7 @@ public class Bank {
 
     Account account = new Account(accountNo,name);
     accounts.add(account);
-    totalAccount += 1;
+    totalAccount ++;
   }
 
 
@@ -40,8 +40,6 @@ public class Bank {
       }
     }
     throw new IllegalArgumentException("No such account");
-
-      //계좌가 없다면 Optional.empty()반환
   }
 
 
