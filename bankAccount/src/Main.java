@@ -37,14 +37,14 @@ public class Main {
         case 2:
           System.out.println("= 해당 계좌번호의 계좌정보 =");
           Account accountFindByAccountNo = bank.getAccount(br.readLine());
-          System.out.println("[계좌번호 :"+ accountFindByAccountNo.getAccountNo()+", 소유자 명 : "+ accountFindByAccountNo.getName()+", 잔액 : "+ accountFindByAccountNo.getBalance()+"]");
+          System.out.println(accountFindByAccountNo.toString());
           break;
 
         case 3:
           System.out.println("= 해당 소유자명의 계좌 목록 =");
           List<Account> accounts = bank.findAccounts(br.readLine());
           for (Account accountFindByName:accounts){
-            toString(accountFindByName);
+            System.out.println(accountFindByName.toString());
           }
           break;
         case 4:
