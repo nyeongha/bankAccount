@@ -19,9 +19,7 @@ public class Bank {
 
 
   public void addAccount(String accountNo, String name) {   //계좌생성 메서드
-    Account account = new Account();
-    account.setAccountNo(accountNo);
-    account.setName(name);
+    Account account = new Account(accountNo,name);
     accounts.add(account);
     totalAccount += 1;
   }
