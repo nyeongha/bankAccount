@@ -4,6 +4,7 @@ import domain.Bank;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class Main {
   private static final int EXIT = 8;
@@ -28,11 +29,25 @@ public class Main {
     while (menu != EXIT){
       switch (menu){
         case 1:
+          System.out.println("== 전체 계좌 목록 ==");
+          for (Account account: bank.getAccounts()){
+            System.out.println(account.toString());
+          }
+          break;
 
         case 2:
+          System.out.println("= 해당 계좌번호의 계좌정보 =");
+          Account accountFindByAccountNo = bank.getAccount(br.readLine());
+          System.out.println(accountFindByAccountNo.toString());
           break;
-        case 3:
 
+        case 3:
+          System.out.println("= 해당 소유자명의 계좌 목록 =");
+          List<Account> accounts = bank.findAccounts(br.readLine());
+          for (Account accountFindByName:accounts){
+            System.out.println(accountFindByName.toString());
+          }
+          break;
         case 4:
           System.out.println("입금할 계좌를 입력해주세요: ");
           String depositAccount = br.readLine();
@@ -65,4 +80,5 @@ public class Main {
     }
 
   }
+
 }
