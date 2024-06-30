@@ -39,29 +39,9 @@ public class Main {
         case 3  -> accountListByName(sb);
         case 4 -> runDeposit(sb);
         case 5 -> runWithdraw(sb);
-        case 6:
-          System.out.println("계좌번호를 입력해주세요");
-          String excistingAccountNo = br.readLine();
-
-          System.out.println("= 거래내역 =");
-          List<Transaction> transactions = bank.getAccount(excistingAccountNo).getTransactions();
-
-          if (transactions.isEmpty()){
-            System.out.println("거래내역이 비었습니다.");
-          } else{
-            for (Transaction transaction : transactions) {
-              System.out.println(transaction.toString());
-            }
-          }
-        case 7:
-          System.out.println("개설할 계좌번호를 입력해주세요");
-          String newAccountNo = br.readLine();
-
-
-          System.out.println("이름을 입력해주세요");
-          String name = br.readLine();
-
-          bank.addAccount(newAccountNo, name);
+        case 6 -> createAccount();
+        case 7 -> browseTransactions(sb);
+        default -> "잘못 입력했습니다";
       };
 
       System.out.println(output);
@@ -119,6 +99,34 @@ public class Main {
     sb.append(depositAccount + "원 입금하셨습니다.").append("\n")
             .append("현재 잔액은: " + findDepositAccount.getBalance() + "원 입니다.");
 
+    return sb.toString();
+  }
+
+  private static String createAccount() throws IOException {
+    System.out.println("개설할 계좌번호를 입력해주세요");
+    String newAccountNo = br.readLine();
+
+    System.out.println("이름을 입력해주세요");
+    String name = br.readLine();
+
+    bank.addAccount(newAccountNo, name);
+    return "계좌를 개설했습니다.";
+  }
+
+  private static String browseTransactions(StringBuilder sb) throws IOException {
+    System.out.println("계좌번호를 입력해주세요");
+    String excistingAccountNo = br.readLine();
+
+    List<Transaction> transactions = bank.getAccount(excistingAccountNo).getTransactions();
+
+    if (transactions.isEmpty()){
+      sb.append("거래내역이 비었습니다.");
+    } else{
+      sb.append("= 거래내역 =");
+      for (Transaction transaction : transactions) {
+        sb.append(transaction.toString());
+      }
+    }
     return sb.toString();
   }
 }
