@@ -53,16 +53,9 @@ public class Main {
         case 7:
         default:
 
-
-
-
-
       }
     }
 
   }
 
-  private static void toString(Account accountFindByName) {
-    System.out.println("[계좌번호 :"+ accountFindByName.getAccountNo()+", 소유자 명 : "+ accountFindByName.getName()+", 잔액 : "+ accountFindByName.getBalance()+"]");
-  }
 }
