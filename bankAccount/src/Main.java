@@ -40,6 +40,8 @@ public class Main {
           System.out.println("입금할 금액을 입력해주세요: ");
           long depositAmount = Long.parseLong(br.readLine());
           findDepositAccount.deposit(depositAmount);
+          System.out.println(depositAccount + "원 입금하셨습니다.");
+          System.out.println("현재 잔액은: " + findDepositAccount.getBalance() + "입니다.");
           break;
         case 5:
           try{
@@ -49,6 +51,8 @@ public class Main {
             System.out.println("출금할 금액을 입력해주세요: ");
             long withDrawAmount = Long.parseLong(br.readLine());
             findWithdrawAccount.withdraw(withDrawAmount);
+            System.out.println(withDrawAmount + "원 출금하셨습니다.");
+            System.out.println("현재 잔액은: " + findWithdrawAccount.getBalance() + "입니다.");
             break;
           }catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
