@@ -7,13 +7,13 @@ import java.util.Optional;
 public class Bank {
 
   private List<Account> accounts;
-  private int totalAccount=0;
+  private int totalAccount = 0;
 
   public Bank() {
     this.accounts = new ArrayList<>();
   }
 
-    public int getTotalAccount() {  //총 계좌수 반환 메서드
+  public int getTotalAccount() {  //총 계좌수 반환 메서드
     return totalAccount;
   }
 
@@ -23,21 +23,22 @@ public class Bank {
     account.setAccountNo(accountNo);
     account.setName(name);
     accounts.add(account);
-    totalAccount+=1;
+    totalAccount += 1;
   }
 
 
   public Optional<Account> getAccount(String accountNo) { //계좌번호로 계좌찾는 메서드
-    for (Account account : accounts) {
-      if (account.getAccountNo().equals(accountNo)) {
-        return Optional.of(account);
+
+    for (Account account : accounts) {    //accounts에 계좌가 있다면 for문 실행
+      if (account.getAccountNo().equals(accountNo)) {   //해당계좌번호가 있다면
+        return Optional.of(account);  //계좌객체 반환
       }
     }
-    return Optional.empty();
+    return Optional.empty();    //계좌가 없다면 Optional.empty()반환
   }
 
 
-  public List<Account> getAccounts(){   //계좌 목록 반환 메서드
+  public List<Account> getAccounts() {   //계좌 목록 반환 메서드
     return accounts;
   }
 
