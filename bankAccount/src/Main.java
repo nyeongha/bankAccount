@@ -122,9 +122,9 @@ public class Main {
         if (transactions.isEmpty()) {
             sb.append("거래내역이 비었습니다.");
         } else {
-            sb.append("= 거래내역 =");
+            sb.append("= 거래내역 =\n");
             for (Transaction transaction : transactions) {
-                sb.append(transaction.toString());
+                sb.append(transaction.toString()).append("\n");
             }
         }
         return sb.toString();
