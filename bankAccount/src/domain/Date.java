@@ -15,11 +15,11 @@ public class Date {
         this.time = LocalTime.now();
     }
 
-    public String getDate(){
+    public String getDate() {
         return date.format(DATE_FORMAT);
     }
 
-    public String getTime(){
+    public String getTime() {
         return time.format(TIME_FORMAT);
     }
 }
