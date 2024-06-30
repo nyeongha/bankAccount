@@ -35,32 +35,12 @@ public class Main {
 
       String output = switch (menu) {
         case 1  -> accountList(sb);
-        case 2  -> AccountInfoByAccountNo(sb);
+        case 2  -> accountInfoByAccountNo(sb);
 
-        case 3  ->{
-          System.out.println("= 해당 소유자명의 계좌 목록 =");
-          List<Account> accounts = bank.findAccounts(br.readLine());
-          for (Account accountFindByName:accounts){
-            sb.append(accountFindByName.toString()).append("\n");
-          }
+        case 3  -> accountListByName(br, sb);
 
-        }
 
-        case 4 -> runDeposit();
-        case 5:
-          try{
-            System.out.println("출금할 계좌를 입력해주세요: ");
-            String account = br.readLine();
-            Account findWithdrawAccount = bank.getAccount(account);
-            System.out.println("출금할 금액을 입력해주세요: ");
-            long withDrawAmount = Long.parseLong(br.readLine());
-            findWithdrawAccount.withdraw(withDrawAmount);
-            System.out.println(withDrawAmount + "원 출금하셨습니다.");
-            System.out.println("현재 잔액은: " + findWithdrawAccount.getBalance() + "입니다.");
-          }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
-          }
-        case 4 -> runDeposit(sb);
+          case 4 -> runDeposit(sb);
         case 5 -> runWithdraw(sb);
         case 6:
           System.out.println("계좌번호를 입력해주세요");
@@ -91,8 +71,17 @@ public class Main {
     }
   }
 
+    private static String accountListByName(BufferedReader br, StringBuilder sb) throws IOException {
+        System.out.println("= 해당 소유자명의 계좌 목록 =");
+        List<Account> accounts = bank.findAccounts(br.readLine());
+        for (Account accountFindByName:accounts){
+          sb.append(accountFindByName.toString()).append("\n");
+        }
+        return sb.toString();
+    }
 
-  private static String AccountInfoByAccountNo(StringBuilder sb) throws IOException {
+
+    private static String accountInfoByAccountNo(StringBuilder sb) throws IOException {
     System.out.println("= 해당 계좌번호의 계좌정보 =");
     Account accountFindByAccountNo = bank.getAccount(br.readLine());
     sb.append(accountFindByAccountNo.toString());
