@@ -20,7 +20,6 @@ public class Account {
     // 과제가 설정되어 있으므로 accountNo와 name은 기본값을 주지 않았습니다.
   }
 
-  // 게터세터
   public String getAccountNo() {
     return accountNo;
   }
