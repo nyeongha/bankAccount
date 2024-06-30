@@ -18,7 +18,15 @@ public class Bank {
   }
 
 
-  public void addAccount(String accountNo, String name) {   //계좌생성 메서드
+  public void addAccount(String accountNo, String name) {
+    //계좌생성 메서드
+    try{
+      Integer.parseInt(accountNo);
+
+    } catch (NumberFormatException e) {
+      System.out.println("Invalid account number");
+    }
+
     Account account = new Account(accountNo,name);
     accounts.add(account);
     totalAccount ++;
