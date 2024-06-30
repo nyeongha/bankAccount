@@ -14,9 +14,9 @@ public class Main {
   public static void main(String[] args) throws IOException {
 
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    StringBuilder sb = new StringBuilder();
+    StringBuilder mainSb = new StringBuilder();
 
-    sb.append("1. 전체 계좌 출력\n")
+    mainSb.append("1. 전체 계좌 출력\n")
             .append("2. 계좌로 계좌 정보 찾기\n")
             .append("3. 소유주 명으로 계좌 찾기\n")
             .append("4. 입금\n")
@@ -25,27 +25,24 @@ public class Main {
             .append("7. 계좌 개설\n")
             .append("8. 종료");
 
-    System.out.println(sb);
+    System.out.println(mainSb);
 
     int menu = 0;
     while (menu != EXIT){
       menu = Integer.parseInt(br.readLine());
+      StringBuilder sb=new StringBuilder();
       String output = switch (menu) {
-        case 1:
-          System.out.println("== 전체 계좌 목록 ==");
-          for (Account account: bank.getAccounts()){
-            System.out.println(account.toString());
-          }
-        case 2:
-          System.out.println("= 해당 계좌번호의 계좌정보 =");
-          Account accountFindByAccountNo = bank.getAccount(br.readLine());
-          System.out.println(accountFindByAccountNo.toString());
-        case 3:
+        case 1  -> accountList(sb);
+        case 2  -> AccountInfoByAccountNo(sb);
+
+        case 3  ->{
           System.out.println("= 해당 소유자명의 계좌 목록 =");
           List<Account> accounts = bank.findAccounts(br.readLine());
           for (Account accountFindByName:accounts){
-            System.out.println(accountFindByName.toString());
+            sb.append(accountFindByName.toString()).append("\n");
           }
+        }
+
         case 4 -> runDeposit();
         case 5:
           try{
@@ -88,6 +85,21 @@ public class Main {
       System.out.println(output);
     }
 
+  }
+
+  private static String AccountInfoByAccountNo(StringBuilder sb) throws IOException {
+    System.out.println("= 해당 계좌번호의 계좌정보 =");
+    Account accountFindByAccountNo = bank.getAccount(br.readLine());
+    sb.append(accountFindByAccountNo.toString());
+    return sb.toString();
+  }
+
+  private static String accountList(StringBuilder sb) {
+    System.out.println("== 전체 계좌 목록 ==");
+    for (Account account: bank.getAccounts()){
+      sb.append(account.toString());
+    }
+    return sb.toString();
   }
 
   private static String runDeposit() throws IOException {
