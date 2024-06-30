@@ -1,10 +1,8 @@
 package domain;
 
-import static exception.ErrorMessage.ALREADY_EXIST;
 import static exception.ErrorMessage.NO_ACCOUNT;
 import static exception.ErrorMessage.NO_SUCH_ACCOUNT;
 
-import exception.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 
